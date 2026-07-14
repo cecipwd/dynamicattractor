@@ -50,6 +50,14 @@ into `./attractor_network_results/`.
 
 ---
 
+## Author Contributions
+
+!!!
+**TODO**
+!!!
+
+---
+
 ## Reproducibility
 
 `RANDOM_SEED = 42` is fixed in the parameter cell, so a clean top-to-bottom run reproduces the
@@ -78,7 +86,7 @@ Every figure comes straight from a notebook cell — run the section and the plo
 
 ---
 
-## Main findings (short version)
+## Main findings 
 
 - Fusion is driven by **direct Hebbian potentiation of cross-assembly weights during external
   co-stimulation**, not by internally driven recruitment.
@@ -91,6 +99,11 @@ Every figure comes straight from a notebook cell — run the section and the plo
 
 Full method, results, and limitations are in the technical note.
 
+---
+
+## Documentation of LLM Usage
+
+We used Claude (Model Opus 4.8), Gemini (Model **XX**  ) and DeepSeek (Model **XX**  ) to aid us in producing the code, assist in the roadmap for the project and how to organize the presentation.
 ---
 
 ## Citation
