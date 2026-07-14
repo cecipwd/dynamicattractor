@@ -52,9 +52,14 @@ into `./attractor_network_results/`.
 
 ## Author Contributions
 
-!!!
-**TODO**
-!!!
+Alejandra Sagastume wrote the code for the milestones 1-2 and created the code repository
+
+Edith Aguado programmed milestone 3 and contributed to milestone 5
+
+Cecilia Impagliatelli wrote the code for milestone 4-5
+
+All authors contributed to project planning, the design of the final presentation and the
+organization of the final code repository.
 
 ---
 
@@ -103,7 +108,7 @@ Full method, results, and limitations are in the technical note.
 
 ## Documentation of LLM Usage
 
-We used Claude (Model Opus 4.8), Gemini (Model **XX**  ) and DeepSeek (Model **XX**  ) to aid us in producing the code, assist in the roadmap for the project and how to organize the presentation.
+We used Claude (Model Opus 4.8), Gemini (Model 3.1 Pro) and DeepSeek (Model 3) to aid us in producing the code, assist in the roadmap for the project and how to organize the presentation.
 
 ---
 
