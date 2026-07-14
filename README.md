@@ -20,7 +20,7 @@ Reference implementation: [MartaBoscaglia/DynamicAttractorNetworkModel_2023](htt
 
 | File | What it is |
 |---|---|
-| `dynamic_attractor_network_colab.ipynb` | Main notebook — all code and experiments (Weeks 1–6). |
+| `dynamic_attractor_network.ipynb` | Main notebook — all code and experiments (Milestones 1–6). |
 | `requirements.txt` | pip dependencies. |
 | `technical_note.` | Method + results + limitations write-up. |
 
@@ -43,9 +43,9 @@ jupyter notebook dynamic_attractor_network_colab.ipynb
 (Or with conda: `conda env create -f environment.yaml && conda activate dynamic-attractor`.)
 
 **Run the cells top to bottom.** The **Setup & base model** block *must* run first — it defines the
-parameters, the core simulation loop, and the helper functions every later week reuses.
+parameters, the core simulation loop, and the helper functions every later milestone reuses.
 
-Figures render **inline** as each plotting cell runs. A few cells also save `.png`/`.npy` artifacts
+Figures render **inline** as each plotting cell runs. A few cells also save `.npy` artifacts
 into `./attractor_network_results/`.
 
 ---
@@ -77,17 +77,21 @@ preceded by a small **sanity-check** run; lower `total_time` there for a faster 
 
 Every figure comes straight from a notebook cell — run the section and the plot appears inline.
 
+## How the results / figures were generated
+
+Every figure comes straight from a notebook cell — run the section and the plot appears inline.
+
 | Notebook section | Produces | Corresponds to (paper) |
 |---|---|---|
-| **Setup & base model (Weeks 1–3)** | Firing-rate heatmap + weight-evolution summary of a single assembly | Fig. 2 |
-| **Week 2 milestone** | Intra-assembly weight over time, sampled at each stimulation onset | Fig. 4A |
-| **Week 3 milestone** | Stability check (bounded weights/rates + forgetting), with pass/fail summary | Fig. 2B |
-| **Week 4** | Frequency-dependent assembly growth across onset frequencies | Fig. 4 |
-| **Week 5** | Memory competition: reinforced vs. forgotten assemblies | Fig. 6 |
-| **Week 5 (two-phase)** | Formation (Phase 1) then competition (Phase 2), plotted separately and combined | Fig. 6 |
-| **Week 6 — overlapping memories** | Cross-assembly overlap from co-presentation | Fig. 9 |
-| **Week 6 — functional bridge** | `factor_SW` × co-presentation sweeps + scalar overlap metric ("semantic bridge") | Suppl. Fig. S5 |
-| **Week 6 — staggered onsets** | Bridge tuning via a small stagger delay between assembly onsets | Suppl. Fig. S5 |
+| **Setup** | Parameters, stimulation schedule, helper functions and the core simulation loop — must run first | — |
+| **Milestone 1 — baseline model** | Firing-rate trace showing the assembly returns to baseline after stimulation, plus mean-weight evolution | Fig. 2 |
+| **Milestone 2 — Full Model** | Intra-assembly mean weight over time, weight growth sampled at each stimulation onset, and a firing-rate heatmap around the stimulation period | Fig. 4A |
+| **Milestone 2 → Stability Check** | Three-panel check: weight std plateaus, firing rates stay ≤ `r_max`, and the SR/SW normalization factors dip below 1 — with an automated pass/fail summary | Fig. 2B |
+| **Milestone 3 — Frequency-dependent assembly growth** | Assembly growth across onset frequencies (1/30, 1/40, 1/60, 1/120), with a summary table | Fig. 4 |
+| **Milestone 4 → Phase 1 — Assembly formation** | Growth of the three assemblies (P1–P3) from a blank weight matrix | Fig. 6 |
+| **Milestone 4 → Phase 2 — Memory competition** | Stitched Phase 1 + Phase 2 timeline of assembly sizes, plus mean incoming synaptic weight from P1 (synaptic recruitment) | Fig. 6, Fig. 9B |
+| **Milestone 5 — Overlapping memories** | Overlap metric (IoU) vs. co-presentation interval — the memory phase transition — swept across `factor_SW` values (0.85, 1.0, 1.5) over 3 seeds | Fig. 9 |
+| **Milestone 5 → Functional bridge with staggered onsets** | Heatmap of the memory-overlap phase space: co-presentation interval × stagger delay | Suppl. Fig. S5 |
 
 ---
 
