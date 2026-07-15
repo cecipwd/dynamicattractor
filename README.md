@@ -83,15 +83,15 @@ Every figure comes straight from a notebook cell — run the section and the plo
 
 | Notebook section | Produces | Corresponds to (paper) |
 |---|---|---|
-| **Setup** | Parameters, stimulation schedule, helper functions and the core simulation loop — must run first | — |
+| **Setup** | Parameters, stimulation schedule, helper functions and the core simulation loop — must run first | - |
 | **Milestone 1 — baseline model** | Firing-rate trace showing the assembly returns to baseline after stimulation, plus mean-weight evolution | Fig. 2 |
 | **Milestone 2 — Full Model** | Intra-assembly mean weight over time, weight growth sampled at each stimulation onset, and a firing-rate heatmap around the stimulation period | Fig. 4A |
 | **Milestone 2 → Stability Check** | Three-panel check: weight std plateaus, firing rates stay ≤ `r_max`, and the SR/SW normalization factors dip below 1 — with an automated pass/fail summary | Fig. 2B |
 | **Milestone 3 — Frequency-dependent assembly growth** | Assembly growth across onset frequencies (1/30, 1/40, 1/60, 1/120), with a summary table | Fig. 4 |
 | **Milestone 4 → Phase 1 — Assembly formation** | Growth of the three assemblies (P1–P3) from a blank weight matrix | Fig. 6 |
 | **Milestone 4 → Phase 2 — Memory competition** | Stitched Phase 1 + Phase 2 timeline of assembly sizes, plus mean incoming synaptic weight from P1 (synaptic recruitment) | Fig. 6, Fig. 9B |
-| **Milestone 5 — Overlapping memories** | Overlap metric (IoU) vs. co-presentation interval — the memory phase transition — swept across `factor_SW` values (0.85, 1.0, 1.5) over 3 seeds | Fig. 9 |
-| **Milestone 5 → Functional bridge with staggered onsets** | Heatmap of the memory-overlap phase space: co-presentation interval × stagger delay | Suppl. Fig. S5 |
+| **Milestone 5 — Overlapping memories** | Overlap metric (IoU) vs. co-presentation interval — the memory phase transition — swept across `factor_SW` values (0.85, 1.0, 1.5) over 3 seeds | - |
+| **Milestone 5 → Functional bridge with staggered onsets** | Heatmap of the memory-overlap phase space: co-presentation interval × stagger delay | - |
 
 ---
 
