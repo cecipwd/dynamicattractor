@@ -5,7 +5,7 @@ Computational-neuroscience seminar project reproducing and extending
 ([paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011727)).
 
 We implement a **rate-based recurrent network of 100 neurons** that forms memory *assemblies*
-through online Hebbian learning, and use it to study when two memories **fuse**, **stay separate**,
+through online Hebbian learning, and use it to study when two or more memories **fuse**, **stay separate**,
 or settle into a **stable partial overlap** ("semantic bridge").
 
 The model includes neural adaptation, online Hebbian learning with a forgetting term, Gaussian
@@ -52,11 +52,11 @@ into `./attractor_network_results/`.
 
 ## Author Contributions
 
-Alejandra Sagastume wrote the code for the milestones 1-2 and created the code repository
+Alejandra Sagastume wrote the code for the milestones 1-2 and created the code repository.
 
-Edith Aguado programmed milestone 3 and contributed to milestone 5
+Edith Aguado programmed milestone 3 and contributed to milestone 5.
 
-Cecilia Impagliatelli wrote the code for milestone 4-5
+Cecilia Impagliatelli wrote the code for milestone 4-5.
 
 All authors contributed to project planning, the design of the final presentation and the
 organization of the final code repository.
@@ -68,14 +68,10 @@ organization of the final code repository.
 `RANDOM_SEED = 42` is fixed in the parameter cell, so a clean top-to-bottom run reproduces the
 figures in the report and presentation. Set it to `None` for a fresh random run.
 
-Some full-length runs (Weeks 4–6) use large `total_time` values and take several minutes. Each is
+Some full-length runs use large `total_time` values and take several minutes. Each is
 preceded by a small **sanity-check** run; lower `total_time` there for a faster preview.
 
 ---
-
-## How the results / figures were generated
-
-Every figure comes straight from a notebook cell — run the section and the plot appears inline.
 
 ## How the results / figures were generated
 
