@@ -4,15 +4,18 @@ Computational-neuroscience seminar project reproducing and extending
 **Boscaglia et al. (2023)**, *PLOS Computational Biology*
 ([paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011727)).
 
-We implement a **rate-based recurrent network of 100 neurons** that forms memory *assemblies*
-through online Hebbian learning, and use it to study when two or more memories **fuse**, **stay separate**,
-or settle into a **stable partial overlap** ("semantic bridge").
+The reproduction and extension are addressed by two main research questions, respectively:
+1. How do memory assemblies dynamically evolve based on the frequency of stimulus presentation?
+2. Under what conditions can we support the creation of overlapping assemblies to represent associated memories?
 
-The model includes neural adaptation, online Hebbian learning with a forgetting term, Gaussian
-background noise, and two normalization mechanisms — synaptic normalization (**SW**) and divisive
-normalization (**SR**) — following the paper.
+To investigate these research questions, we develop five milestones:
+- Milestone 1 & 2 implement a static **rate-based recurrent network of 100 neurons**, adding step-by-step the dynamic mechanisms (Hebbian learning with forgetting term, background noise, neural adaptation, synaptic & divisive normalization) and testing their effectiveness.
+- Milestone 3 & 4 address the first research question. In particular, Milestone 3 tests the relationship between assembly growth and frequency of stimulation, whereas Milestone 4 investigates the formation, reinforcement and forgetting of 3 different assemblies with different stimulation frequency.
+- Milestone 5 addresses the second research question. In particular, we develop 2 different hypotheses, investigating the interplay between interleaved co-stimulation and synaptic normalization firstly, and secondly the interplay between interleaved co-stimulation and "stagger delays".
+
 
 Reference implementation: [MartaBoscaglia/DynamicAttractorNetworkModel_2023](https://github.com/MartaBoscaglia/DynamicAttractorNetworkModel_2023).
+
 
 ---
 
@@ -80,13 +83,13 @@ Every figure comes straight from a notebook cell — run the section and the plo
 | Notebook section | Produces | Corresponds to (paper) |
 |---|---|---|
 | **Setup** | Parameters, stimulation schedule, helper functions and the core simulation loop — must run first | - |
-| **Milestone 1 — baseline model** | Firing-rate trace showing the assembly returns to baseline after stimulation, plus mean-weight evolution | Fig. 2 |
+| **Milestone 1 — Baseline model** | Firing-rate trace showing the assembly returns to baseline after stimulation, plus mean-weight evolution | Fig. 2 |
 | **Milestone 2 — Full Model** | Intra-assembly mean weight over time, weight growth sampled at each stimulation onset, and a firing-rate heatmap around the stimulation period | Fig. 4A |
 | **Milestone 2 → Stability Check** | Three-panel check: weight std plateaus, firing rates stay ≤ `r_max`, and the SR/SW normalization factors dip below 1 — with an automated pass/fail summary | Fig. 2B |
 | **Milestone 3 — Frequency-dependent assembly growth** | Assembly growth across onset frequencies (1/30, 1/40, 1/60, 1/120), with a summary table | Fig. 4 |
 | **Milestone 4 → Phase 1 — Assembly formation** | Growth of the three assemblies (P1–P3) from a blank weight matrix | Fig. 6 |
-| **Milestone 4 → Phase 2 — Memory competition** | Stitched Phase 1 + Phase 2 timeline of assembly sizes, plus mean incoming synaptic weight from P1 (synaptic recruitment) | Fig. 6, Fig. 9B |
-| **Milestone 5 — Overlapping memories** | Overlap metric (IoU) vs. co-presentation interval — the memory phase transition — swept across `factor_SW` values (0.85, 1.0, 1.5) over 3 seeds | - |
+| **Milestone 4 → Phase 2 — Assembly competition** | Stitched Phase 1 + Phase 2 timeline of assembly sizes, plus mean incoming synaptic weight from P1 (synaptic recruitment) | Fig. 6, Fig. 9B |
+| **Milestone 5 — Overlapping assemblies** | Overlap metric (IoU) vs. co-presentation interval — the memory phase transition — swept across `factor_SW` values (0.85, 1.0, 1.5) over 3 seeds | - |
 | **Milestone 5 → Functional bridge with staggered onsets** | Heatmap of the memory-overlap phase space: co-presentation interval × stagger delay | - |
 
 ---
