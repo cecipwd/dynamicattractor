@@ -1,18 +1,11 @@
 # Dynamic Attractor Network — Memory Formation, Reinforcement & Forgetting
 
-Computational-neuroscience seminar project reproducing and extending
-**Boscaglia et al. (2023)**, *PLOS Computational Biology*
+This project is a computational-neuroscience reproduction and extension of **Boscaglia et al. (2023)**, *PLOS Computational Biology*
 ([paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011727)).
 
-The reproduction and extension are addressed by two main research questions, respectively:
-1. How do memory assemblies dynamically evolve based on the frequency of stimulus presentation?
-2. Under what conditions can we support the creation of overlapping assemblies to represent associated memories?
+It investigates how memory assemblies dynamically evolve based on stimulus presentation frequency, and what specific conditions allow them to overlap to represent associated memories. In particular, we hypothesize that the creation of these overlapping assemblies is driven by the interplay between interleaved co-stimulation and either synaptic normalization fine-tuning or staggered delays.
 
-To investigate these research questions, we develop five milestones:
-- Milestone 1 & 2 implement a static **rate-based recurrent network of 100 neurons**, adding step-by-step the dynamic mechanisms (Hebbian learning with forgetting term, background noise, neural adaptation, synaptic & divisive normalization) and testing their effectiveness.
-- Milestone 3 & 4 address the first research question. In particular, Milestone 3 tests the relationship between assembly growth and frequency of stimulation, whereas Milestone 4 investigates the formation, reinforcement and forgetting of 3 different assemblies with different stimulation frequency.
-- Milestone 5 addresses the second research question. In particular, we develop 2 different hypotheses, investigating the interplay between interleaved co-stimulation and synaptic normalization firstly, and secondly the interplay between interleaved co-stimulation and "stagger delays".
-
+To test this, we develop a 100-neuron attractor network across five milestones, sequentially integrating and evaluating dynamic mechanisms like Hebbian learning with forgetting term, neural adaptation, synaptic & divisive normalization, and background noise.
 
 Reference implementation: [MartaBoscaglia/DynamicAttractorNetworkModel_2023](https://github.com/MartaBoscaglia/DynamicAttractorNetworkModel_2023).
 
@@ -23,7 +16,7 @@ Reference implementation: [MartaBoscaglia/DynamicAttractorNetworkModel_2023](htt
 
 | File | What it is |
 |---|---|
-| `dynamic_attractor_network.ipynb` | Main notebook — all code and experiments (Milestones 1–6). |
+| `dynamic_attractor_network.ipynb` | Main notebook — all code and experiments (Milestones 1–5). |
 | `requirements.txt` | pip dependencies. |
 | `technical_note.` | Method + results + limitations write-up. |
 
@@ -71,8 +64,12 @@ organization of the final code repository.
 `RANDOM_SEED = 42` is fixed in the parameter cell, so a clean top-to-bottom run reproduces the
 figures in the report and presentation. Set it to `None` for a fresh random run.
 
+While a fixed seed is used to generate the exact figures seen in the report, the actual hypothesis testing (such as the parameter sweeps in Milestone 5) calculates the Intersection over Union by averaging the results across 3 distinct random seeds. This ensures our core findings are statistically robust and not artifacts of a single network initialization.
+
 Some full-length runs use large `total_time` values and take several minutes. Each is
 preceded by a small **sanity-check** run; lower `total_time` there for a faster preview.
+
+
 
 ---
 
@@ -84,26 +81,22 @@ Every figure comes straight from a notebook cell — run the section and the plo
 |---|---|---|
 | **Setup** | Parameters, stimulation schedule, helper functions and the core simulation loop — must run first | - |
 | **Milestone 1 — Baseline model** | Firing-rate trace showing the assembly returns to baseline after stimulation, plus mean-weight evolution | Fig. 2 |
-| **Milestone 2 — Full Model** | Intra-assembly mean weight over time, weight growth sampled at each stimulation onset, and a firing-rate heatmap around the stimulation period | Fig. 4A |
-| **Milestone 2 → Stability Check** | Three-panel check: weight std plateaus, firing rates stay ≤ `r_max`, and the SR/SW normalization factors dip below 1 — with an automated pass/fail summary | Fig. 2B |
-| **Milestone 3 — Frequency-dependent assembly growth** | Assembly growth across onset frequencies (1/30, 1/40, 1/60, 1/120), with a summary table | Fig. 4 |
-| **Milestone 4 → Phase 1 — Assembly formation** | Growth of the three assemblies (P1–P3) from a blank weight matrix | Fig. 6 |
-| **Milestone 4 → Phase 2 — Assembly competition** | Stitched Phase 1 + Phase 2 timeline of assembly sizes, plus mean incoming synaptic weight from P1 (synaptic recruitment) | Fig. 6, Fig. 9B |
-| **Milestone 5 — Overlapping assemblies** | Overlap metric (IoU) vs. co-presentation interval — the memory phase transition — swept across `factor_SW` values (0.85, 1.0, 1.5) over 3 seeds | - |
-| **Milestone 5 → Functional bridge with staggered onsets** | Heatmap of the memory-overlap phase space: co-presentation interval × stagger delay | - |
+| **Milestone 2 — Full model** | Intra-assembly mean weight over time, weight growth sampled at each stimulation onset, and a firing-rate heatmap around the stimulation period | Fig. 4A |
+| **Milestone 2 → Stability check** | Three-panel check: weight std plateaus, firing rates stay ≤ `r_max`, and the SR/SW normalization factors dip below 1 — with an automated pass/fail summary | Fig. 2B |
+| **Milestone 3 — Frequency-dependent assembly growth** | Assembly growth across onset frequencies (1/30, 1/40, 1/60, 1/120), with a summary table | Fig. 6A |
+| **Milestone 4 → Phase 1 — Assembly formation** | Growth of the three assemblies (P1–P3) from a blank weight matrix | Fig. 9A, top |
+| **Milestone 4 → Phase 2 — Assembly competition** | Stitched Phase 1 + Phase 2 timeline of assembly sizes, plus mean incoming synaptic weight from P1 (synaptic recruitment) | Fig. 9A, Fig. 9B |
+| **Milestone 5 — Overlapping assemblies: hypotheses 1** | Overlap metric (IoU) vs. co-presentation interval, swept across `factor_SW` values (0.85, 1.0, 1.5) over 3 seeds | - |
+| **Milestone 5 — Overlapping assemblies: hypotheses 2** | Heatmap of the memory-overlap phase space: co-presentation interval × stagger delay | - |
 
 ---
 
 ## Main findings 
 
-- Fusion is driven by **direct Hebbian potentiation of cross-assembly weights during external
-  co-stimulation**, not by internally driven recruitment.
-- The synaptic-normalization parameter (`factor_SW`) does **not** prevent fusion across its tested
-  range — it targets internal recurrent activity, not externally co-driven co-firing. Divisive
-  normalization (`Factor_SR`) is a distinct but similarly indirect lever; pushing either too hard
-  destroys assemblies rather than partitioning them.
-- Overlap metrics show **bistable** (all-or-nothing) fusion/separation; the most promising levers for
-  a *graded* partial overlap are **co-presentation frequency** and the **forgetting rate `beta`**.
+- **Relevance of temporal separation**: forming orthogonal memories strictly requires a temporal delay between stimuli. If distinct patterns are stimulated simultaneously, the network's Hebbian learning forces them to fuse into a single "super-assembly".
+- **Memory competition**: frequently recalled memories expand by recruiting free background neurons and abandoned, forgotten memories' neurons. However, even rarely stimulated memories maintain enough synaptic strength to shield themselves from being overwritten by dominant ones.
+- **Binary phase transition of overlaps**: it seems that the model's physics may prevent the formation of overlapping assemblies through co-stimulation. Modulating temporal co-presentation and synaptic normalization does not create overlaps; instead, it triggers a strict, all-or-nothing phase transition where memories either perfectly segregate or completely fuse.
+- **Ineffectiveness of staggered delays**: we hypothesized that introducing a slight temporal stagger during co-presentation might overcome this binary limitation and form a memory bridge. However, a comprehensive 2D parameter sweep comparing co-presentation intervals against stagger delays produced no measurable partial overlap. This confirms that within the current constraints of the model, temporal manipulation alone cannot foster overlapping memories.
 
 Full method, results, and limitations are in the technical note.
 
